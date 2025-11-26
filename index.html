@@ -52,26 +52,33 @@
             .card-interactive { @apply hover:shadow-lift hover:border-slate-300 hover:-translate-y-0.5 cursor-pointer; }
             .card-locked { @apply opacity-60 bg-slate-50 cursor-not-allowed grayscale-[0.8]; }
             
-            /* Card Hover Stripes */
-            .card::before { content: ''; @apply absolute left-0 top-0 bottom-0 w-1 bg-transparent transition-colors duration-200; }
-            .card-digital:hover::before { @apply bg-indigo-500; }
-            .card-paper:hover::before { @apply bg-emerald-500; }
-            .card-class:hover::before { @apply bg-amber-500; }
+            /* Card Hover Stripes & Borders */
+            .card::before { content: ''; @apply absolute left-0 top-0 bottom-0 w-1 transition-colors duration-200; }
+            
+            .card-digital::before { @apply bg-indigo-500; }
+            .card-paper::before { @apply bg-emerald-500; }
+            .card-class::before { @apply bg-amber-500; }
+
+            .card-digital:hover { @apply border-indigo-500; }
+            .card-paper:hover { @apply border-emerald-500; }
+            .card-class:hover { @apply border-amber-500; }
             
             /* DONE STATUS (Vinkje in kaart) */
             .card-done .status-icon { @apply opacity-100 scale-100; }
 
             /* --- TIJDLIJN & ICONEN --- */
-            .timeline-icon { @apply flex-shrink-0 w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-slate-50 z-20 transition-all duration-500; }
+            .timeline-icon { @apply flex-shrink-0 w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-slate-50 z-20 transition-all duration-500 absolute -left-[24px] top-0; }
             .timeline-icon.active { @apply bg-indigo-600 ring-indigo-100 scale-110 shadow-indigo-200; }
             
-            .timeline-line { @apply ml-6 pl-10 border-l-2 border-slate-200 pb-8 transition-colors duration-1000 ease-in-out relative; }
-            .timeline-line.active { @apply border-indigo-500; }
+            .timeline-line { @apply ml-6 pl-10 pb-8 transition-colors duration-1000 ease-in-out relative; }
+            .timeline-line::before { content: ''; @apply absolute -left-[1px] top-0 bottom-0 w-0.5 bg-slate-200 transition-colors duration-1000; }
+            .timeline-line.active::before { @apply bg-indigo-500; }
+            /* Removed .last fade-out to ensure solid connection */
             
             /* Gloeiend effect op de actieve lijn */
             .timeline-line.active::after {
                 content: '';
-                @apply absolute left-[-2px] top-0 bottom-0 w-[2px] bg-indigo-400 shadow-[0_0_10px_rgba(99,102,241,0.6)];
+                @apply absolute -left-[1px] top-0 bottom-0 w-[2px] bg-indigo-400 shadow-[0_0_10px_rgba(99,102,241,0.6)];
             }
 
             /* --- UI ELEMENTS --- */
@@ -219,7 +226,7 @@
         </div>
 
         <!-- STAP C -->
-        <div id="line-c" class="timeline-line border-l-transparent pb-0">
+        <div id="line-c" class="timeline-line pb-0">
             <div id="icon-c" class="timeline-icon absolute -left-[23px] top-0">C</div>
 
             <div class="mb-6 pt-1">
@@ -252,7 +259,7 @@
         </div>
 
         <!-- STAP D -->
-        <div id="line-d" class="timeline-line border-l-transparent pb-0">
+        <div id="line-d" class="timeline-line last pb-0">
             <div id="icon-d" class="timeline-icon absolute -left-[23px] top-0">D</div>
 
             <div class="mb-6 pt-1">
@@ -264,8 +271,7 @@
                 </div>
             </div>
 
-            <a id="card-exit" href="#"
-                class="card card-interactive card-digital group relative transition-all border-l-4 border-l-indigo-500">
+            <a id="card-exit" href="#" class="card card-interactive card-digital group relative transition-all">
                 <div
                     class="status-icon absolute bottom-4 right-4 text-emerald-500 opacity-0 transform scale-50 transition-all duration-300">
                     <i class="ph-fill ph-check-circle text-2xl"></i>
